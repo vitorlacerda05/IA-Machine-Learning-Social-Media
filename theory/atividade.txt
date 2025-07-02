@@ -1,0 +1,39 @@
+# **Visão Geral**
+
+As redes sociais desempenham um papel importante nas interações pessoais até estratégias de marketing, campanhas políticas e ações de mobilização social.
+
+Um dos principais indicadores de sucesso de uma publicação é o **engajamento**. Compreender (e até mesmo prever) o engajamento de postagens se tornou uma tarefa estratégica em várias áreas e é um bom desafios para a área de inteligência artificial.
+
+Na segunda parte de atividades de avaliação da disciplina de I.A., os é compartilhado um conjunto de dados contendo publicações anônimas em redes sociais com os seguintes atributos:
+
+* `anon_id`: identificador anonimizado do autor
+* `content`: conteúdo textual do post
+* `reactions`: número de reações recebidas
+* `comments`: número de comentários
+* `engagement`: classificação binária (`high` ou `low`)
+
+Com base nesse conjunto, serão realizadas três atividades.
+
+## **Atividade 1 — Classificação Supervisionada**
+
+Nesta atividade, você deve **comparar quatro diferentes paradigmas de aprendizado de máquina**: probabilísticos, simbólicos, conexionistas e estatísticos.
+
+> **Importante:** Durante a **etapa de inferência**, o modelo **só poderá utilizar o conteúdo textual** (`content`) do post para prever o engajamento. Informações como `reactions` e `comments` devem ser utilizadas apenas na etapa de treinamento, se desejar, mas não podem ser usadas como entrada no momento da predição de novos posts (eles não estarão disponíveis em inferência).
+
+Para avaliação, será disponibilizado um arquivo de teste contendo **novas postagens sem o rótulo de engajamento**, e cada aluno deverá submeter suas **previsões finais de engajamento** para essas novas entradas.
+
+## **Atividade 2 — Aprendizado não Supervisionado**
+
+Nesta atividade, você deve utilizar **métodos de aprendizado não supervisionado** vistos em sala de aula, como **k-means** ou **redes SOM**, para **identificar padrões nos dados de engajamento**.
+
+O objetivo é compreender **quais tópicos, padrões ou grupos de postagens** estão mais associados a alto ou baixo engajamento.
+
+## **Atividade 3 — Desenvolvimento de um Agente Criativo para Geração de Postagens Engajadas**
+
+Esta é uma atividade **aberta à criatividade dos alunos**. O desafio consiste em desenvolver um **agente inteligente** que utilize **modelos de aprendizado profundo ou inteligência artificial generativa** para **auxiliar na criação de postagens com maior potencial de engajamento**.
+
+Esse agente pode explorar:
+
+* Análise de características de postagens com alto engajamento
+* Reescrita ou sugestão de novos textos com base em um post inicial
+* Combinação de diferentes abordagens estudadas ao longo da disciplina
