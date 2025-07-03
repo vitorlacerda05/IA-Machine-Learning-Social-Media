@@ -1,4 +1,4 @@
-# Machine Learning para Análise de Engajamento em Redes Sociais
+# Machine learning para análise de engajamento em redes sociais
 
 ## 📋 Descrição
 
@@ -8,8 +8,6 @@ Projeto que implementa e compara **diferentes abordagens de Machine Learning** p
 
 1. **Classificação Supervisionada**: Prever se uma postagem terá **alto** ou **baixo engajamento** baseado no conteúdo textual
 2. **Clustering Não Supervisionado**: Descobrir grupos naturais de postagens similares baseado apenas no conteúdo textual
-
-> **Restrição:** Durante a inferência, apenas o conteúdo textual pode ser usado.
 
 ## 🏆 Resultados dos Experimentos
 
@@ -26,13 +24,13 @@ Projeto que implementa e compara **diferentes abordagens de Machine Learning** p
 
 ## 🔬 Abordagens de Machine Learning Implementadas
 
-### 📊 Aprendizado Supervisionado
+### Aprendizado Supervisionado
 1. **Probabilístico**: Naive Bayes, Regressão Logística
 2. **Simbólico**: Árvore de Decisão, Random Forest
 3. **Conexionista**: Rede Neural Multicamadas
 4. **Estatístico**: SVM, KNN ⭐ **MELHOR**, Gradient Boosting
 
-### 🎯 Aprendizado Não Supervisionado
+### Aprendizado Não Supervisionado
 1. **Clustering**: K-Means com 15 clusters
 
 ## 📁 Estrutura do Projeto
@@ -93,112 +91,6 @@ python predictionKmeans.py
 - `modelo_kmeans_engajamento.pkl` - Modelo treinado
 - `df_kaggle_kmeans.csv` - Clusters no formato de submissão
 
-## 📊 Formato do CSV de Saída
-
-### KNN (Supervisionado)
-| ID  | Engagement |
-| --- | ---------- |
-| 0   | alto       |
-| 1   | baixo      |
-| 2   | alto       |
-| ... | ...        |
-
-### K-Means (Não Supervisionado)
-| ID  | Engagement |
-| --- | ---------- |
-| 0   | 3          |
-| 1   | 7          |
-| 2   | 12         |
-| ... | ...        |
-
-> **Nota**: No K-Means, "Engagement" representa o número do cluster (0-14), não categorias de engajamento.
-
-## 🔧 Arquitetura Técnica
-
-### **🔄 Pipeline de Processamento**
-1. **Extração de Features**: Sentence Transformers "all-MiniLM-L6-v2"
-2. **Embeddings**: 384 dimensões de representação semântica
-3. **Normalização**: Processamento automático de texto
-
-### **📊 Modelo Supervisionado (KNN)**
-```python
-KNeighborsClassifier(
-    n_neighbors=3,      # 3 vizinhos mais próximos
-    metric="cosine",    # Distância cosseno para similaridade semântica
-    weights="uniform"   # Peso uniforme entre vizinhos
-)
-```
-
-### **🎯 Modelo Não Supervisionado (K-Means)**
-```python
-KMeans(
-    n_clusters=15,      # 15 grupos naturais
-    random_state=0,     # Reproduzibilidade dos resultados
-    n_init=10          # 10 inicializações para otimização
-)
-```
-
-### **📈 Estratégias de Validação**
-
-#### **Supervisionado (KNN)**
-- **Stratified Split**: 70% treino, 30% teste
-- **Cross-Validation**: 5-fold para robustez
-- **Métricas**: Acurácia, Precisão, Recall, F1-Score
-
-#### **Não Supervisionado (K-Means)**
-- **Inércia**: Medida de coesão dos clusters
-- **Análise Exploratória**: Relação clusters vs engajamento real
-- **Validação Intrínseca**: Qualidade da separação dos grupos
-
-## 🏆 Análise Comparativa dos Modelos
-
-### **Por que KNN Superou o SVM na Classificação Supervisionada?**
-
-#### **Problemas do SVM**
-- **Overfitting**: Kernel RBF muito complexo para o domínio
-- **Sensibilidade**: Muito sensível a outliers nos dados
-- **Memorização**: Pode memorizar dados de treinamento
-
-#### **Vantagens do KNN**
-- **Similaridade Semântica**: Funciona perfeitamente com embeddings
-- **Robustez**: Menos propenso a overfitting
-- **Adaptabilidade**: Ajusta-se dinamicamente aos novos dados
-
-### **Contribuições do K-Means para Análise Não Supervisionada**
-- **Descoberta de Padrões**: Revela grupos naturais nos dados
-- **Análise Exploratória**: Insights sobre tipos de conteúdo
-- **Validação de Hipóteses**: Confirma ou refuta suposições sobre engajamento
-
-## 🔍 Fundamentos de Machine Learning: Supervisionado vs Não Supervisionado
-
-### **📊 Aprendizado Supervisionado (KNN)**
-**Definição**: Algoritmo que aprende a mapear entradas para saídas conhecidas usando dados rotulados.
-
-**Características:**
-- ✅ **Dados de Treinamento**: `(texto, engajamento)` - pares entrada-saída
-- ✅ **Objetivo**: Aprender função `f: texto → {alto, baixo}`
-- ✅ **Validação**: Métricas claras (acurácia, precisão, recall)
-- ✅ **Aplicação**: Classificação direta com interpretação clara
-
-**Vantagens:**
-- Resultados interpretáveis e acionáveis
-- Avaliação objetiva do desempenho
-- Aplicação direta em problemas de classificação
-
-### **🎯 Aprendizado Não Supervisionado (K-Means)**
-**Definição**: Algoritmo que descobre padrões ocultos nos dados sem usar informações de saída.
-
-**Características:**
-- ✅ **Dados de Treinamento**: `texto` - apenas entradas
-- ✅ **Objetivo**: Descobrir grupos naturais nos dados
-- ✅ **Validação**: Métricas intrínsecas (inércia, silhueta)
-- ✅ **Aplicação**: Análise exploratória e descoberta de padrões
-
-**Vantagens:**
-- Não requer dados rotulados
-- Descobre insights inesperados
-- Útil para análise exploratória inicial
-
 ## 📚 Referências e Fundamentos Teóricos
 
 ### **Machine Learning**
@@ -215,8 +107,3 @@ KMeans(
 - **Aprendizado Não Supervisionado**: Clustering e descoberta de padrões
 - **Validação Cruzada**: Estratégias de avaliação robusta
 - **Overfitting**: Problema de generalização em ML
-
-## 👨‍💻 Autor
-
-**Vitor Antonio de Almeida Lacerda** - NUSP: 12544761  
-**Disciplina**: Inteligência Artificial
