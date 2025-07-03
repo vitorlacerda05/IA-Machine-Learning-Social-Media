@@ -4,14 +4,14 @@
 
 Projeto que implementa e compara **diferentes abordagens de Machine Learning** para análise de engajamento em redes sociais, demonstrando tanto **aprendizado supervisionado** quanto **não supervisionado**.
 
-### 🎯 Objetivos
+### Objetivos
 
 1. **Classificação Supervisionada**: Prever se uma postagem terá **alto** ou **baixo engajamento** baseado no conteúdo textual
 2. **Clustering Não Supervisionado**: Descobrir grupos naturais de postagens similares baseado apenas no conteúdo textual
 
 ## 🏆 Resultados dos Experimentos
 
-### 🎯 Classificação Supervisionada
+### Classificação Supervisionada
 **K-Nearest Neighbors (KNN)** demonstrou ser o melhor modelo para classificação supervisionada, superando o SVM que inicialmente apresentou melhor performance na validação cruzada.
 
 **Por que KNN foi o Melhor?**
@@ -19,7 +19,7 @@ Projeto que implementa e compara **diferentes abordagens de Machine Learning** p
 - **Similaridade semântica**: Funciona excepcionalmente bem com embeddings
 - **Adaptabilidade**: Captura melhor padrões dinâmicos de redes sociais
 
-### 🔍 Clustering Não Supervisionado
+### Clustering Não Supervisionado
 **K-Means** foi implementado para descobrir padrões ocultos nos dados, agrupando postagens por similaridade textual sem usar informações de engajamento durante o treinamento.
 
 ## 🔬 Abordagens de Machine Learning Implementadas
