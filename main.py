@@ -214,7 +214,7 @@ class ClassificadorEngajamento:
         
         print(f"   Acurácia Random Forest: {rf_accuracy:.4f}")
         print(f"   CV Score: {rf_cv_scores.mean():.4f} (+/- {rf_cv_scores.std() * 2:.4f})")
-        
+         
         # Armazenar resultados
         self.modelos['Arvore_Decisao'] = dt_model
         self.modelos['Random_Forest'] = rf_model
