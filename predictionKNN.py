@@ -1,12 +1,3 @@
-"""
-PredictionKNN.py - Predição de Engajamento em Redes Sociais
-Usando o modelo KNN
-
-Autor: Vitor Antonio de Almeida Lacerda
-NUSP: 12544761
-Disciplina: Inteligência Artificial
-"""
-
 import pandas as pd
 import numpy as np
 from sentence_transformers import SentenceTransformer

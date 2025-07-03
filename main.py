@@ -1,16 +1,3 @@
-"""
-Atividade 1 - Classificação Supervisionada de Engajamento em Redes Sociais
-Comparação dos quatro paradigmas de aprendizado de máquina:
-1. Probabilístico (Naive Bayes, Regressão Logística)
-2. Simbólico (Árvores de Decisão, Random Forest)
-3. Conexionista (Redes Neurais)
-4. Estatístico (SVM, KNN, Gradient Boosting)
-
-Autor: Vitor Antonio de Almeida Lacerda
-NUSP: 12544761
-Disciplina: Inteligência Artificial
-"""
-
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
