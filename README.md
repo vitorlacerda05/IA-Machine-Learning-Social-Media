@@ -32,7 +32,8 @@ Prever se uma postagem terá **alto** ou **baixo engajamento** baseado apenas no
 ```
 supervised-classification-of-social-networks/
 ├── main.py                                # Análise completa dos 4 paradigmas
-├── predictionKNN.py                       # Pipeline de predição com KNN
+├── predictionKNN.py                       # Pipeline de predição com KNN (Supervisionado)
+├── predictionKmeans.py                    # Pipeline de clustering com K-Means (Não Supervisionado)
 ├── requirements.txt                       # Dependências
 ├── README.md                             # Este arquivo
 ├── DADOS.md                              # Instruções para dados
@@ -44,8 +45,10 @@ supervised-classification-of-social-networks/
 **📁 Arquivos de Dados (não incluídos no repo):**
 - `df_social_data_train.pkl` - Dados de treinamento (~8.5MB)
 - `df_social_data_test.csv` - Dados de teste (~3.5MB)
-- `modelo_knn_engajamento.pkl` - Modelo treinado (~120MB)
-- `df_kaggle_knn.csv` - Predições (~100KB)
+- `modelo_knn_engajamento.pkl` - Modelo KNN treinado (~120MB)
+- `modelo_kmeans_engajamento.pkl` - Modelo K-Means treinado (~120MB)
+- `df_kaggle_knn.csv` - Predições KNN (~100KB)
+- `df_kaggle_kmeans.csv` - Clusters K-Means (~100KB)
 
 > **Nota**: Veja `DADOS.md` para instruções sobre como obter os dados.
 
@@ -61,7 +64,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-### 3. Predição com KNN (Melhor Modelo)
+### 3. Predição com KNN (Supervisionado - Melhor Modelo)
 ```bash
 python predictionKNN.py
 ```
@@ -70,14 +73,34 @@ python predictionKNN.py
 - `modelo_knn_engajamento.pkl` - Modelo treinado
 - `df_kaggle_knn.csv` - Predições no formato de submissão
 
+### 4. Clustering com K-Means (Não Supervisionado)
+```bash
+python predictionKmeans.py
+```
+
+**Saídas:**
+- `modelo_kmeans_engajamento.pkl` - Modelo treinado
+- `df_kaggle_kmeans.csv` - Clusters no formato de submissão
+
 ## 📊 Formato do CSV de Saída
 
+### KNN (Supervisionado)
 | ID  | Engagement |
 | --- | ---------- |
 | 0   | alto       |
 | 1   | baixo      |
 | 2   | alto       |
 | ... | ...        |
+
+### K-Means (Não Supervisionado)
+| ID  | Engagement |
+| --- | ---------- |
+| 0   | 3          |
+| 1   | 7          |
+| 2   | 12         |
+| ... | ...        |
+
+> **Nota**: No K-Means, "Engagement" representa o número do cluster (0-14), não categorias de engajamento.
 
 ## 🔧 Características Técnicas
 
@@ -86,12 +109,21 @@ python predictionKNN.py
 - **384 dimensões** de embeddings
 - **Normalização automática** dos textos
 
-### **Modelo KNN Otimizado**
+### **Modelo KNN Otimizado (Supervisionado)**
 ```python
 KNeighborsClassifier(
     n_neighbors=3,      # 3 vizinhos mais próximos
     metric="cosine",    # Distância cosseno
     weights="uniform"   # Peso uniforme
+)
+```
+
+### **Modelo K-Means (Não Supervisionado)**
+```python
+KMeans(
+    n_clusters=15,      # 15 clusters
+    random_state=0,     # Reproduzibilidade
+    n_init=10          # 10 inicializações
 )
 ```
 
@@ -112,6 +144,20 @@ KNeighborsClassifier(
 - Menos propenso a overfitting
 - Adapta-se dinamicamente aos novos dados
 
+## 🔍 Comparação: Supervisionado vs Não Supervisionado
+
+### **KNN (Supervisionado)**
+- ✅ Usa labels de treinamento
+- ✅ Prediz categorias específicas (alto/baixo)
+- ✅ Métricas de avaliação claras
+- ✅ Melhor para classificação direta
+
+### **K-Means (Não Supervisionado)**
+- ✅ Descobre padrões ocultos
+- ✅ Agrupa por similaridade textual
+- ✅ Não precisa de labels prévios
+- ✅ Útil para análise exploratória
+
 ## 📚 Referências
 
 - [scikit-learn Supervised Learning](https://scikit-learn.org/stable/supervised_learning.html)
@@ -124,4 +170,4 @@ KNeighborsClassifier(
 
 ---
 
-**Nota**: Projeto desenvolvido para a Atividade 1 de IA, focando na comparação dos quatro paradigmas de aprendizado de máquina. O KNN demonstrou ser o modelo mais eficaz para classificação de engajamento em redes sociais. 
+**Nota**: Projeto desenvolvido para a Atividade 1 de IA, focando na comparação dos quatro paradigmas de aprendizado de máquina. O KNN demonstrou ser o modelo mais eficaz para classificação de engajamento em redes sociais. Também inclui implementação de K-Means para análise não supervisionada. 
