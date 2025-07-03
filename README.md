@@ -1,31 +1,39 @@
-# Classificação Supervisionada de Engajamento em Redes Sociais
+# Machine Learning para Análise de Engajamento em Redes Sociais
 
 ## 📋 Descrição
 
-Projeto que implementa e compara **quatro paradigmas de aprendizado de máquina** para classificar engajamento de postagens em redes sociais.
+Projeto que implementa e compara **diferentes abordagens de Machine Learning** para análise de engajamento em redes sociais, demonstrando tanto **aprendizado supervisionado** quanto **não supervisionado**.
 
-### 🎯 Objetivo
+### 🎯 Objetivos
 
-Prever se uma postagem terá **alto** ou **baixo engajamento** baseado apenas no conteúdo textual.
+1. **Classificação Supervisionada**: Prever se uma postagem terá **alto** ou **baixo engajamento** baseado no conteúdo textual
+2. **Clustering Não Supervisionado**: Descobrir grupos naturais de postagens similares baseado apenas no conteúdo textual
 
 > **Restrição:** Durante a inferência, apenas o conteúdo textual pode ser usado.
 
-## 🏆 Resultado Final
+## 🏆 Resultados dos Experimentos
 
-**K-Nearest Neighbors (KNN)** demonstrou ser o melhor modelo, superando o SVM que inicialmente apresentou melhor performance na validação cruzada.
+### 🎯 Classificação Supervisionada
+**K-Nearest Neighbors (KNN)** demonstrou ser o melhor modelo para classificação supervisionada, superando o SVM que inicialmente apresentou melhor performance na validação cruzada.
 
-### 🎯 Por que KNN foi o Melhor?
-
+**Por que KNN foi o Melhor?**
 - **Robustez**: Menos propenso a overfitting
 - **Similaridade semântica**: Funciona excepcionalmente bem com embeddings
 - **Adaptabilidade**: Captura melhor padrões dinâmicos de redes sociais
 
-## 🔬 Paradigmas Implementados
+### 🔍 Clustering Não Supervisionado
+**K-Means** foi implementado para descobrir padrões ocultos nos dados, agrupando postagens por similaridade textual sem usar informações de engajamento durante o treinamento.
 
+## 🔬 Abordagens de Machine Learning Implementadas
+
+### 📊 Aprendizado Supervisionado
 1. **Probabilístico**: Naive Bayes, Regressão Logística
 2. **Simbólico**: Árvore de Decisão, Random Forest
 3. **Conexionista**: Rede Neural Multicamadas
 4. **Estatístico**: SVM, KNN ⭐ **MELHOR**, Gradient Boosting
+
+### 🎯 Aprendizado Não Supervisionado
+1. **Clustering**: K-Means com 15 clusters
 
 ## 📁 Estrutura do Projeto
 
@@ -59,24 +67,27 @@ supervised-classification-of-social-networks/
 pip install -r requirements.txt
 ```
 
-### 2. Análise Completa dos Paradigmas
+### 2. Análise Comparativa de Algoritmos Supervisionados
 ```bash
 python main.py
 ```
+> **Resultado**: Comparação completa de 4 paradigmas de ML supervisionado
 
-### 3. Predição com KNN (Supervisionado - Melhor Modelo)
+### 3. Classificação Supervisionada com KNN
 ```bash
 python predictionKNN.py
 ```
+> **Resultado**: Modelo treinado com labels de engajamento
 
 **Saídas:**
 - `modelo_knn_engajamento.pkl` - Modelo treinado
 - `df_kaggle_knn.csv` - Predições no formato de submissão
 
-### 4. Clustering com K-Means (Não Supervisionado)
+### 4. Clustering Não Supervisionado com K-Means
 ```bash
 python predictionKmeans.py
 ```
+> **Resultado**: Agrupamento baseado apenas na similaridade textual
 
 **Saídas:**
 - `modelo_kmeans_engajamento.pkl` - Modelo treinado
@@ -102,72 +113,110 @@ python predictionKmeans.py
 
 > **Nota**: No K-Means, "Engagement" representa o número do cluster (0-14), não categorias de engajamento.
 
-## 🔧 Características Técnicas
+## 🔧 Arquitetura Técnica
 
-### **Processamento de Texto**
-- **Sentence Transformers**: Modelo "all-MiniLM-L6-v2"
-- **384 dimensões** de embeddings
-- **Normalização automática** dos textos
+### **🔄 Pipeline de Processamento**
+1. **Extração de Features**: Sentence Transformers "all-MiniLM-L6-v2"
+2. **Embeddings**: 384 dimensões de representação semântica
+3. **Normalização**: Processamento automático de texto
 
-### **Modelo KNN Otimizado (Supervisionado)**
+### **📊 Modelo Supervisionado (KNN)**
 ```python
 KNeighborsClassifier(
     n_neighbors=3,      # 3 vizinhos mais próximos
-    metric="cosine",    # Distância cosseno
-    weights="uniform"   # Peso uniforme
+    metric="cosine",    # Distância cosseno para similaridade semântica
+    weights="uniform"   # Peso uniforme entre vizinhos
 )
 ```
 
-### **Modelo K-Means (Não Supervisionado)**
+### **🎯 Modelo Não Supervisionado (K-Means)**
 ```python
 KMeans(
-    n_clusters=15,      # 15 clusters
-    random_state=0,     # Reproduzibilidade
-    n_init=10          # 10 inicializações
+    n_clusters=15,      # 15 grupos naturais
+    random_state=0,     # Reproduzibilidade dos resultados
+    n_init=10          # 10 inicializações para otimização
 )
 ```
 
-### **Validação**
+### **📈 Estratégias de Validação**
+
+#### **Supervisionado (KNN)**
 - **Stratified Split**: 70% treino, 30% teste
-- **Cross-Validation**: 5-fold
+- **Cross-Validation**: 5-fold para robustez
 - **Métricas**: Acurácia, Precisão, Recall, F1-Score
 
-## 🏆 Por que KNN Superou o SVM?
+#### **Não Supervisionado (K-Means)**
+- **Inércia**: Medida de coesão dos clusters
+- **Análise Exploratória**: Relação clusters vs engajamento real
+- **Validação Intrínseca**: Qualidade da separação dos grupos
 
-### **Overfitting do SVM**
-- Kernel RBF muito complexo
-- Sensível a outliers
-- Pode memorizar dados de treinamento
+## 🏆 Análise Comparativa dos Modelos
 
-### **Robustez do KNN**
-- Baseado em similaridade semântica
-- Menos propenso a overfitting
-- Adapta-se dinamicamente aos novos dados
+### **Por que KNN Superou o SVM na Classificação Supervisionada?**
 
-## 🔍 Comparação: Supervisionado vs Não Supervisionado
+#### **Problemas do SVM**
+- **Overfitting**: Kernel RBF muito complexo para o domínio
+- **Sensibilidade**: Muito sensível a outliers nos dados
+- **Memorização**: Pode memorizar dados de treinamento
 
-### **KNN (Supervisionado)**
-- ✅ Usa labels de treinamento
-- ✅ Prediz categorias específicas (alto/baixo)
-- ✅ Métricas de avaliação claras
-- ✅ Melhor para classificação direta
+#### **Vantagens do KNN**
+- **Similaridade Semântica**: Funciona perfeitamente com embeddings
+- **Robustez**: Menos propenso a overfitting
+- **Adaptabilidade**: Ajusta-se dinamicamente aos novos dados
 
-### **K-Means (Não Supervisionado)**
-- ✅ Descobre padrões ocultos
-- ✅ Agrupa por similaridade textual
-- ✅ Não precisa de labels prévios
-- ✅ Útil para análise exploratória
+### **Contribuições do K-Means para Análise Não Supervisionada**
+- **Descoberta de Padrões**: Revela grupos naturais nos dados
+- **Análise Exploratória**: Insights sobre tipos de conteúdo
+- **Validação de Hipóteses**: Confirma ou refuta suposições sobre engajamento
 
-## 📚 Referências
+## 🔍 Fundamentos de Machine Learning: Supervisionado vs Não Supervisionado
 
+### **📊 Aprendizado Supervisionado (KNN)**
+**Definição**: Algoritmo que aprende a mapear entradas para saídas conhecidas usando dados rotulados.
+
+**Características:**
+- ✅ **Dados de Treinamento**: `(texto, engajamento)` - pares entrada-saída
+- ✅ **Objetivo**: Aprender função `f: texto → {alto, baixo}`
+- ✅ **Validação**: Métricas claras (acurácia, precisão, recall)
+- ✅ **Aplicação**: Classificação direta com interpretação clara
+
+**Vantagens:**
+- Resultados interpretáveis e acionáveis
+- Avaliação objetiva do desempenho
+- Aplicação direta em problemas de classificação
+
+### **🎯 Aprendizado Não Supervisionado (K-Means)**
+**Definição**: Algoritmo que descobre padrões ocultos nos dados sem usar informações de saída.
+
+**Características:**
+- ✅ **Dados de Treinamento**: `texto` - apenas entradas
+- ✅ **Objetivo**: Descobrir grupos naturais nos dados
+- ✅ **Validação**: Métricas intrínsecas (inércia, silhueta)
+- ✅ **Aplicação**: Análise exploratória e descoberta de padrões
+
+**Vantagens:**
+- Não requer dados rotulados
+- Descobre insights inesperados
+- Útil para análise exploratória inicial
+
+## 📚 Referências e Fundamentos Teóricos
+
+### **Machine Learning**
 - [scikit-learn Supervised Learning](https://scikit-learn.org/stable/supervised_learning.html)
-- Sentence Transformers: [Hugging Face](https://huggingface.co/sentence-transformers)
+- [scikit-learn Unsupervised Learning](https://scikit-learn.org/stable/unsupervised_learning.html)
+- [K-Means Clustering](https://scikit-learn.org/stable/modules/clustering.html#k-means)
+
+### **Processamento de Linguagem Natural**
+- [Sentence Transformers](https://huggingface.co/sentence-transformers)
+- [Embeddings Semânticos](https://www.sbert.net/)
+
+### **Conceitos Fundamentais**
+- **Aprendizado Supervisionado**: Classificação com dados rotulados
+- **Aprendizado Não Supervisionado**: Clustering e descoberta de padrões
+- **Validação Cruzada**: Estratégias de avaliação robusta
+- **Overfitting**: Problema de generalização em ML
 
 ## 👨‍💻 Autor
 
 **Vitor Antonio de Almeida Lacerda** - NUSP: 12544761  
 **Disciplina**: Inteligência Artificial
-
----
-
-**Nota**: Projeto desenvolvido para a Atividade 1 de IA, focando na comparação dos quatro paradigmas de aprendizado de máquina. O KNN demonstrou ser o modelo mais eficaz para classificação de engajamento em redes sociais. Também inclui implementação de K-Means para análise não supervisionada. 
